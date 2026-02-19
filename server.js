@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
+const adminRoutes = require("./routes/admin");
 const app = express();
 const PORT = 3000;
 
@@ -29,5 +31,17 @@ app.get("/:page", (req, res) => {
     res.send(html);
   });
 });
+
+// Session beállítása (ez kell a belépéshez)
+app.use(
+  session({
+    secret: "titkos-kulcs-ide",
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
+
+// Az admin modul beregisztrálása
+app.use("/admin", adminRoutes);
 
 app.listen(PORT, () => console.log(`Szerver: http://localhost:${PORT}`));
