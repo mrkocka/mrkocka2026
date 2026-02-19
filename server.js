@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const session = require("express-session");
 const adminRoutes = require("./routes/admin");
+require("dotenv").config();
 const app = express();
 const PORT = 3000;
 
@@ -35,7 +36,7 @@ app.get("/:page", (req, res) => {
 // Session beállítása (ez kell a belépéshez)
 app.use(
   session({
-    secret: "titkos-kulcs-ide",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
   }),
