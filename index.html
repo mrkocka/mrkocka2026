@@ -51,10 +51,10 @@
                 <button class="btnStyle ubuntu-bold cvBtn">CV letöltése</button>
                 <div class="socialWrap">
                     <ul class="socialList">
-                        <li class="socialItem">A</li>
-                        <li class="socialItem">A</li>
-                        <li class="socialItem">A</li>
-                        <li class="socialItem">A</li>
+                        <li class="socialItem"><a href="#"><img src="./img/logo/github.svg" alt="githubLogo"></a></li>
+                        <li class="socialItem"><a href="#"><img src="./img/logo/linkedin.svg" alt="linkedinLogo"></a>
+                        </li>
+                        <li class="socialItem"><a href="#"><img src="./img/logo/tiktok.svg" alt="tiktokLogo"></a></li>
                     </ul>
                 </div>
             </section>
@@ -190,7 +190,7 @@
         <!-- Imsereteim -->
         <article id="skills">
             <div class="skillsHeading">
-                <h2 class="ubuntu-bold">Skills</h2>
+                <h2 class="ubuntu-bold">Ismereteim</h2>
                 <p class="skillsLead ubuntu-medium">Gyakorlati tudás, stabil technikai alapok és fejlesztői szemlélet.
                 </p>
             </div>
@@ -275,40 +275,123 @@
 
 
 
-           
+
             </section>
         </article>
 
-        <!-- Projektek --> -->
+        <!-- Projektek -->
         <article id="projects">
-            <h2 class="ubuntu-bold">Projektek</h2>
-            <p>Lorem ipsum dolor sit amet </p>
-            <section>
-                <button></button>
-                <button></button>
-                <button></button>
-                <button></button>
+            <div class="projectsHeading">
+                <h2 class="ubuntu-bold">Projektek</h2>
+                <p class="projectsLead ubuntu-medium">Különböző területekről válogatott munkák, letisztult felépítéssel
+                    és
+                    gyors áttekinthetőséggel.</p>
+            </div>
+            <section class="projectsContainer">
+                <div class="projectFilters" role="tablist" aria-label="Projekt kategóriák">
+                    <button class="projectFilterButton ubuntu-bold is-active" type="button"
+                        data-category="weboldalak">Weboldalak</button>
+                    <button class="projectFilterButton ubuntu-bold" type="button"
+                        data-category="scriptek">Scriptek</button>
+                    <button class="projectFilterButton ubuntu-bold" type="button"
+                        data-category="programok">Programok</button>
+                    <button class="projectFilterButton ubuntu-bold" type="button" data-category="esp32">ESP32</button>
+                    <button class="projectFilterButton ubuntu-bold" type="button"
+                        data-category="serverek">Szerverek</button>
+                </div>
+                <div class="projectsPanel card-style">
+                    <div class="projectsGrid" id="projectsGrid"></div>
+                </div>
             </section>
-            <section>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </section>
+
         </article>
 
+        <!-- Kapcsolat -->
         <article id="contact">
-            <h2 class="ubuntu-bold">Kapcsolat </h2>
-            <p>Lorem ipsum dolor sit amet </p>
-            <section>
-                <div>From</div>
-                <div>Ide valami</div>
+            <div class="contactHeading">
+                <h2 class="ubuntu-bold">Kapcsolat</h2>
+                <p class="contactLead ubuntu-medium">Mondd el röviden, min dolgoznál velem, és nézzük meg, hogyan tudunk
+                    belőle működő megoldást építeni.</p>
+            </div>
+            <section class="contactLayout">
+                <form class="card-style contactForm">
+                    <h3 class="ubuntu-bold">Írd meg az elképzelésed</h3>
+                    <div class="contactFieldGrid">
+                        <label class="contactField">
+                            <span class="ubuntu-medium">Név</span>
+                            <input type="text" name="name" placeholder="Neved">
+                        </label>
+                        <label class="contactField">
+                            <span class="ubuntu-medium">Téma</span>
+                            <input type="text" name="topic" placeholder="Pl. weboldal, automatizálás">
+                        </label>
+                    </div>
+                    <label class="contactField">
+                        <span class="ubuntu-medium">E-mail</span>
+                        <input type="email" name="email" placeholder="email@pelda.hu">
+                    </label>
+                    <label class="contactField">
+                        <span class="ubuntu-medium">Költségkeret</span>
+                        <select name="budget">
+                            <option value="">Válassz kategóriát</option>
+                            <option value="small">100 000 Ft alatt</option>
+                            <option value="medium">100 000 - 300 000 Ft</option>
+                            <option value="large">300 000 Ft felett</option>
+                        </select>
+                    </label>
+                    <label class="contactField">
+                        <span class="ubuntu-medium">Projekt leírása</span>
+                        <textarea name="message" rows="7"
+                            placeholder="Írj pár mondatot arról, mire lenne szükséged."></textarea>
+                    </label>
+                    <button class="btnStyle ubuntu-bold contactSubmitButton" type="submit">Üzenet küldése</button>
+                </form>
+
+                <div class="card-style contactInfoCard">
+                    <div class="contactInfoHighlight">
+                        <h4 class="ubuntu-bold">Így dolgozunk együtt az első lépésektől.</h4>
+                        <ul class="contactInfoSteps ubuntu-medium">
+                            <li>Gyors egyeztetés az igényeidről és a céljaidról</li>
+                            <li>Átlátható technikai irány és megvalósítási javaslat</li>
+                            <li>Gyakorlati, hosszú távon is működő megoldások</li>
+                        </ul>
+                        <p class="contactInfoText ubuntu-medium">Ha már van konkrét elképzelésed, vagy csak egy ötleted,
+                            amiből működő rendszert szeretnél, segítek megtalálni a megfelelő technikai irányt.</p>
+                    </div>
+                    <div class="contactDirectBox">
+                        <p class="contactDirectLabel ubuntu-bold">Közvetlen elérhetőségek</p>
+                        <div class="contactDirectMeta">
+                            <p class="contactMetaLabel ubuntu-bold">Telefon</p>
+                            <p class="contactDirectValue ubuntu-medium" id="contactPhoneValue">+36 30 123 4567</p>
+                        </div>
+                        <div class="contactDirectMeta">
+                            <p class="contactMetaLabel ubuntu-bold">E-mail</p>
+                            <p class="contactDirectValue ubuntu-medium" id="contactEmailValue">hello@mrkocka.hu</p>
+                        </div>
+                        <div class="contactDirectActions">
+                            <a class="btnStyle ubuntu-bold contactActionButton" href="tel:+36301234567">Hívás</a>
+                            <a class="btnStyle ubuntu-bold contactActionButton" href="mailto:hello@mrkocka.hu">Email
+                                írása</a>
+                            <button class="btnStyle ubuntu-bold contactActionButton" type="button" id="copyEmailButton"
+                                data-copy-target="contactEmailValue">Másolás</button>
+                        </div>
+                    </div>
+                </div>
             </section>
         </article>
     </main>
     <footer>
-        <p>mrkocka</p>
+        <div class="footerContent">
+            <p class="footerBrand ubuntu-bold">Mr.Kocka</p>
+            <nav class="footerNav" aria-label="Jogi információk">
+                <a class="ubuntu-medium" href="#">Sütikezelés</a>
+                <a class="ubuntu-medium" href="#">Adatkezelési szabályzat</a>
+                <a class="ubuntu-medium" href="#">Impresszum</a>
+            </nav>
+            <p class="footerCopy ubuntu-medium">Copyright © 2020 - 2026 Mr.Kocka. Minden jog fenntartva.</p>
+        </div>
     </footer>
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

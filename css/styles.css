@@ -215,6 +215,27 @@ header {
     background-color: rgba(0, 0, 0, 0.18);
 }
 
+.socialItem a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.socialItem img {
+    width: 30px;
+    height: 30px;
+    display: block;
+    filter: brightness(0) invert(1);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.socialItem:hover img {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
+
 .introVisual {
     display: flex;
     justify-content: center;
@@ -566,5 +587,484 @@ header {
 
     .skillCard h3 {
         font-size: 1.55rem;
+    }
+}
+
+/* --- Projektek --- */
+
+#projects {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.projectsHeading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.8rem;
+}
+
+.projectsHeading h2 {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.projectsLead {
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.projectsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.projectFilters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.projectFilterButton {
+    min-width: 126px;
+    padding: 0.85rem 1.15rem;
+    border-radius: 999px;
+    border: 1px solid rgba(245, 245, 245, 0.16);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--main-text-w);
+    font-size: 0.95rem;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.projectFilterButton:hover {
+    cursor: pointer;
+    transform: translateY(-1px);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.projectFilterButton.is-active {
+    background: rgba(255, 255, 255, 0.13);
+    color: var(--main-text-b);
+    border-color: rgba(255, 255, 255, 0.32);
+}
+
+.projectsPanel {
+    padding: 1.4rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+.projectsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+}
+
+.projectCard {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.projectImage {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.projectCardBody {
+    padding: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    flex: 1;
+}
+
+.projectCardTitle {
+    color: var(--main-text-b);
+    font-size: 1.35rem;
+    line-height: 1.15;
+}
+
+.projectCardDescription {
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.65;
+    font-size: 0.95rem;
+}
+
+.projectCardActions {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+
+.projectActionButton {
+    min-width: 102px;
+    height: 38px;
+    padding: 0 0.95rem;
+}
+
+@media (max-width: 1100px) {
+    .projectsGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .projectsHeading h2 {
+        font-size: 2.35rem;
+    }
+
+    .projectsPanel {
+        padding: 1rem;
+    }
+
+    .projectsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .projectFilterButton {
+        min-width: unset;
+        padding: 0.78rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Kapcsolat --- */
+
+#contact {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contactHeading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.8rem;
+}
+
+.contactHeading h2 {
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.contactLead {
+    max-width: 760px;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+.contactLayout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.contactForm,
+.contactInfoCard {
+    padding: 1.5rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.22);
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+}
+
+.contactForm h3,
+.contactInfoCard h3 {
+    color: var(--main-text-b);
+    font-size: 2rem;
+    line-height: 1.1;
+}
+
+.contactFieldGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.contactField {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    color: var(--main-text-w);
+}
+
+.contactField span {
+    font-size: 0.95rem;
+}
+
+.contactField input,
+.contactField select,
+.contactField textarea {
+    width: 100%;
+    border: 1px solid rgba(245, 245, 245, 0.14);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.4);
+    color: var(--main-text-b);
+    padding: 1rem 1.05rem;
+    font-size: 0.98rem;
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.contactField textarea {
+    resize: vertical;
+    min-height: 180px;
+}
+
+.contactField input::placeholder,
+.contactField textarea::placeholder,
+.contactField select {
+    color: rgba(255, 255, 255, 0.62);
+}
+
+.contactField input:focus,
+.contactField select:focus,
+.contactField textarea:focus {
+    border-color: rgba(22, 160, 133, 0.55);
+    box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.12);
+    background: rgba(0, 0, 0, 0.55);
+}
+
+.contactSubmitButton {
+    width: fit-content;
+    min-width: 168px;
+    height: 44px;
+    padding: 0 1.2rem;
+    margin-top: 0.4rem;
+}
+
+.contactInfoCard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.contactInfoHighlight {
+    min-height: 360px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.contactInfoEyebrow {
+    color: var(--main-hover);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.8rem;
+}
+
+.contactInfoHighlight h4 {
+    max-width: 22ch;
+    color: var(--main-text-b);
+    font-size: 2rem;
+    line-height: 140%;
+}
+
+.contactInfoSteps {
+    display: grid;
+    gap: 0.8rem;
+    list-style: none;
+}
+
+.contactInfoSteps li {
+    padding-left: 1.15rem;
+    position: relative;
+    color: var(--main-text-w);
+    line-height: 1.6;
+}
+
+.contactInfoSteps li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 50%;
+    background-color: var(--main-hover);
+    box-shadow: 0 0 16px rgba(22, 160, 133, 0.35);
+}
+
+.contactInfoText {
+    max-width: 46ch;
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.7;
+}
+
+.contactDirectBox {
+    margin-top: auto;
+    padding: 1.2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(245, 245, 245, 0.12);
+    background: rgba(0, 0, 0, 0.32);
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.contactDirectLabel {
+    color: var(--main-text-b);
+    font-size: 1.2rem;
+}
+
+.contactDirectMeta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.contactMetaLabel {
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.88rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.contactDirectValue {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 1rem;
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+.contactDirectActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.contactActionButton {
+    min-width: 136px;
+    height: 42px;
+    padding: 0 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 1100px) {
+    .contactLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .contactInfoHighlight {
+        min-height: 240px;
+    }
+}
+
+@media (max-width: 900px) {
+    .contactHeading h2 {
+        font-size: 2.35rem;
+    }
+
+    .contactForm,
+    .contactInfoCard {
+        padding: 1.2rem;
+    }
+
+    .contactFieldGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .contactForm h3,
+    .contactInfoCard h3 {
+        font-size: 1.7rem;
+    }
+
+    .contactInfoHighlight h4 {
+        max-width: none;
+        font-size: 1.65rem;
+    }
+}
+
+/* --- Footer --- */
+
+footer {
+    margin-top: 4rem;
+    padding: 1.5rem 0 2.5rem;
+}
+
+.footerContent {
+    background-color: var(--main-boxbg);
+    border: 1px solid rgba(245, 245, 245, 0.14);
+    border-radius: 22px;
+    padding: 1.4rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.2);
+}
+
+.footerBrand {
+    color: var(--main-text-b);
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+}
+
+.footerNav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+}
+
+.footerNav a {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.95rem;
+    transition: color 0.25s ease;
+}
+
+.footerNav a:hover {
+    color: var(--main-text-b);
+}
+
+.footerCopy {
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    footer {
+        margin-top: 3rem;
+        padding-bottom: 2rem;
+    }
+
+    .footerNav {
+        gap: 0.85rem 1rem;
+    }
+
+    .footerCopy {
+        font-size: 0.84rem;
     }
 }
