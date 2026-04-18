@@ -1,127 +1,67 @@
-const projectData = {
-    weboldalak: [
-        {
-            title: "Vállalkozói landing oldal",
-            description: "Gyors, reszponzív bemutatkozó oldal modern felépítéssel, kapcsolatfelvételi fókuszpontokkal.",
-            image: "./img/workTime.webp"
-        },
-        {
-            title: "Szolgáltatás alapú weboldal",
-            description: "Letisztult, üzleti célú weboldal jól strukturált szekciókkal és erős vizuális hierarchiával.",
-            image: "./img/mrkocka.png"
-        },
-        {
-            title: "WordPress céges oldal",
-            description: "Könnyen kezelhető adminfelülettel és átlátható tartalomkezeléssel épített céges megoldás.",
-            image: "./img/workTime.webp"
-        }
-    ],
-    scriptek: [
-        {
-            title: "Automatikus mentési script",
-            description: "Időzített futással készített mentési folyamat, naplózással és egyszerű hibakezeléssel.",
-            image: "./img/workTime.webp"
-        },
-        {
-            title: "Rendszerfigyelő segédscript",
-            description: "Szerverállapot és szolgáltatások ellenőrzése gyors visszajelzésekkel és értesítési logikával.",
-            image: "./img/mrkocka.png"
-        },
-        {
-            title: "Adatfeldolgozó script",
-            description: "Rutin folyamatok gyorsítására készített script, ismétlődő feladatok automatizálására.",
-            image: "./img/workTime.webp"
-        }
-    ],
-    programok: [
-        {
-            title: "Belső admin eszköz",
-            description: "Egyszerűbb vállalati folyamatok támogatására készített egyedi program felhasználóbarát felülettel.",
-            image: "./img/mrkocka.png"
-        },
-        {
-            title: "Kezelőpanel alkalmazás",
-            description: "Adatkezelésre és gyors műveletekre épített könnyen használható asztali vagy webes program.",
-            image: "./img/workTime.webp"
-        },
-        {
-            title: "Projektkövető megoldás",
-            description: "Feladatok, státuszok és alapvető munkafolyamatok áttekintésére készített rendszer.",
-            image: "./img/mrkocka.png"
-        }
-    ],
-    esp32: [
-        {
-            title: "Szenzoros ESP32 projekt",
-            description: "Érzékelőkkel és adatküldéssel működő IoT megoldás valós idejű állapotkövetéshez.",
-            image: "./img/workTime.webp"
-        },
-        {
-            title: "Okoseszköz vezérlő modul",
-            description: "ESP32 alapú vezérlés automatizálási és távoli kapcsolódási lehetőségekkel.",
-            image: "./img/mrkocka.png"
-        },
-        {
-            title: "Wi-Fi alapú beágyazott rendszer",
-            description: "Kompakt hardveres megoldás webes felülettel és egyszerű kezelhetőséggel.",
-            image: "./img/workTime.webp"
-        }
-    ],
-    serverek: [
-        {
-            title: "Linux webszerver környezet",
-            description: "Domainnel, SSL-lel és stabil kiszolgálással felépített szerveres környezet éles használatra.",
-            image: "./img/mrkocka.png"
-        },
-        {
-            title: "Docker alapú szolgáltatás",
-            description: "Konténerizált alkalmazáskörnyezet egyszerűbb telepítéssel és átláthatóbb üzemeltetéssel.",
-            image: "./img/workTime.webp"
-        },
-        {
-            title: "Fordított proxy megoldás",
-            description: "Cloudflare vagy Nginx alapú réteg a biztonság, routing és publikus elérés rendezésére.",
-            image: "./img/mrkocka.png"
-        }
-    ]
-};
-
-const projectsGrid = document.querySelector("#projectsGrid");
+const projectCards = document.querySelectorAll(".projectCard");
 const projectFilterButtons = document.querySelectorAll(".projectFilterButton");
+const projectModalOpenButtons = document.querySelectorAll("[data-project-modal-open]");
+const projectModalCloseButtons = document.querySelectorAll("[data-project-modal-close]");
+const projectModals = document.querySelectorAll(".projectModal");
+const copyEmailButton = document.querySelector("#copyEmailButton");
 
-function createProjectCard(project) {
-    return `
-        <article class="projectCard card-style">
-            <img class="projectImage" src="${project.image}" alt="${project.title}">
-            <div class="projectCardBody">
-                <h3 class="projectCardTitle ubuntu-bold">${project.title}</h3>
-                <p class="projectCardDescription ubuntu-medium">${project.description}</p>
-                <div class="projectCardActions">
-                    <button class="btnStyle ubuntu-bold projectActionButton" type="button">Részletek</button>
-                    <button class="btnStyle ubuntu-bold projectActionButton" type="button">Kód</button>
-                    <button class="btnStyle ubuntu-bold projectActionButton" type="button">Demo</button>
-                </div>
-            </div>
-        </article>
-    `;
+function setActiveProjectCategory(category) {
+    projectFilterButtons.forEach((button) => {
+        const isActive = button.dataset.category === category;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-selected", String(isActive));
+    });
+
+    projectCards.forEach((card) => {
+        const shouldShow = card.dataset.projectType === category;
+        card.classList.toggle("is-hidden", !shouldShow);
+    });
 }
 
-function renderProjects(category) {
-    const projects = projectData[category] || [];
-    projectsGrid.innerHTML = projects.map(createProjectCard).join("");
+function closeAllProjectModals() {
+    projectModals.forEach((modal) => {
+        modal.hidden = true;
+    });
+
+    document.body.classList.remove("is-modal-open");
 }
 
 projectFilterButtons.forEach((button) => {
     button.addEventListener("click", () => {
-        projectFilterButtons.forEach((item) => item.classList.remove("is-active"));
-        button.classList.add("is-active");
-        renderProjects(button.dataset.category);
+        setActiveProjectCategory(button.dataset.category);
     });
 });
 
-renderProjects("weboldalak");
+projectModalOpenButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const modalId = button.dataset.projectModalOpen;
+        const targetModal = document.querySelector(`#modal-${modalId}`);
 
-const copyEmailButton = document.querySelector("#copyEmailButton");
+        if (!targetModal) {
+            return;
+        }
+
+        closeAllProjectModals();
+        targetModal.hidden = false;
+        document.body.classList.add("is-modal-open");
+    });
+});
+
+projectModalCloseButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        closeAllProjectModals();
+    });
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        closeAllProjectModals();
+    }
+});
+
+if (projectFilterButtons.length > 0) {
+    setActiveProjectCategory(projectFilterButtons[0].dataset.category);
+}
 
 if (copyEmailButton) {
     copyEmailButton.addEventListener("click", async () => {

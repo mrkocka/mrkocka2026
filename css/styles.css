@@ -674,6 +674,14 @@ header {
     background: rgba(255, 255, 255, 0.03);
 }
 
+.projectCard.is-hidden {
+    display: none;
+}
+
+.projectImageWrap {
+    position: relative;
+}
+
 .projectImage {
     width: 100%;
     aspect-ratio: 16 / 10;
@@ -690,6 +698,26 @@ header {
     flex: 1;
 }
 
+.projectCardMeta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.projectTypeTag {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.42rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
 .projectCardTitle {
     color: var(--main-text-b);
     font-size: 1.35rem;
@@ -700,6 +728,22 @@ header {
     color: rgba(255, 255, 255, 0.78);
     line-height: 1.65;
     font-size: 0.95rem;
+}
+
+.projectTechList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    list-style: none;
+}
+
+.projectTechList li {
+    padding: 0.45rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.82rem;
 }
 
 .projectCardActions {
@@ -713,11 +757,183 @@ header {
     min-width: 102px;
     height: 38px;
     padding: 0 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-align: center;
+}
+
+.projectModals {
+    display: contents;
+}
+
+.projectModal {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: grid;
+    place-items: center;
+    padding: 1.2rem;
+}
+
+.projectModal[hidden] {
+    display: none;
+}
+
+.projectModalBackdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.projectModalDialog {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 1040px);
+    max-height: min(90vh, 940px);
+    overflow-y: auto;
+    padding: 1.4rem;
+    background: linear-gradient(180deg, rgba(18, 18, 18, 0.96), rgba(28, 28, 28, 0.94));
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+}
+
+.projectModalClose {
+    position: sticky;
+    top: 0;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 108px;
+    height: 40px;
+    z-index: 2;
+}
+
+.projectModalHero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 1.2rem;
+    margin-top: 0.8rem;
+    align-items: start;
+}
+
+.projectModalImage {
+    width: 100%;
+    aspect-ratio: 16 / 11;
+    object-fit: cover;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.projectModalIntro {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.projectModalIntro h3 {
+    color: var(--main-text-b);
+    font-size: 2.35rem;
+    line-height: 1.05;
+}
+
+.projectModalLead {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+}
+
+.projectModalActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 0.35rem;
+}
+
+.projectBlock h4 {
+    color: var(--main-text-b);
+    font-size: 1.05rem;
+}
+
+.projectBlock p {
+    color: rgba(255, 255, 255, 0.76);
+    line-height: 1.7;
+}
+
+.projectModalBlocks {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.4rem;
+}
+
+.projectBlock {
+    padding: 1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    display: grid;
+    gap: 0.8rem;
+}
+
+.projectBodyBlock {
+    gap: 1rem;
+}
+
+.projectBodyText {
+    font-size: 1rem;
+    line-height: 1.85;
+}
+
+.projectGallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.projectGallery img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.projectBlockList {
+    display: grid;
+    gap: 0.7rem;
+    list-style: none;
+}
+
+.projectBlockList li {
+    position: relative;
+    padding-left: 1.15rem;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.7;
+}
+
+.projectBlockList li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.72rem;
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--main-hover);
+}
+
+body.is-modal-open {
+    overflow: hidden;
 }
 
 @media (max-width: 1100px) {
     .projectsGrid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .projectModalHero {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -738,6 +954,22 @@ header {
         min-width: unset;
         padding: 0.78rem 1rem;
         font-size: 0.9rem;
+    }
+
+    .projectModal {
+        padding: 0.8rem;
+    }
+
+    .projectModalDialog {
+        padding: 1rem;
+    }
+
+    .projectModalIntro h3 {
+        font-size: 1.8rem;
+    }
+
+    .projectGallery {
+        grid-template-columns: 1fr;
     }
 }
 

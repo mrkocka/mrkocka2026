@@ -1,3 +1,17 @@
+<?php
+$projects = require __DIR__ . '/data/projects.php';
+$projectTypeLabels = [
+    'website' => 'Weboldalak',
+    'script' => 'Scriptek',
+    'app' => 'Programok',
+    'server' => 'Szerverek',
+];
+
+function escape_html(string $value): string
+{
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+?>
 <!DOCTYPE html>
 <html lang="hu">
 
@@ -289,22 +303,102 @@
             </div>
             <section class="projectsContainer">
                 <div class="projectFilters" role="tablist" aria-label="Projekt kategóriák">
-                    <button class="projectFilterButton ubuntu-bold is-active" type="button"
-                        data-category="weboldalak">Weboldalak</button>
-                    <button class="projectFilterButton ubuntu-bold" type="button"
-                        data-category="scriptek">Scriptek</button>
-                    <button class="projectFilterButton ubuntu-bold" type="button"
-                        data-category="programok">Programok</button>
-                    <button class="projectFilterButton ubuntu-bold" type="button" data-category="esp32">ESP32</button>
-                    <button class="projectFilterButton ubuntu-bold" type="button"
-                        data-category="serverek">Szerverek</button>
+                    <?php foreach ($projectTypeLabels as $type => $label): ?>
+                        <button class="projectFilterButton ubuntu-bold<?= $type === 'website' ? ' is-active' : ''; ?>" type="button"
+                            data-category="<?= escape_html($type); ?>"><?= escape_html($label); ?></button>
+                    <?php endforeach; ?>
                 </div>
                 <div class="projectsPanel card-style">
-                    <div class="projectsGrid" id="projectsGrid"></div>
+                    <div class="projectsGrid" id="projectsGrid">
+                        <?php foreach ($projects as $project): ?>
+                            <article class="projectCard card-style"
+                                data-project-type="<?= escape_html($project['type']); ?>">
+                                <div class="projectImageWrap">
+                                    <img class="projectImage" src="<?= escape_html($project['cover_image']); ?>"
+                                        alt="<?= escape_html($project['cover_alt']); ?>">
+                                </div>
+                                <div class="projectCardBody">
+                                    <div class="projectCardMeta">
+                                        <span class="projectTypeTag ubuntu-medium"><?= escape_html($projectTypeLabels[$project['type']] ?? $project['type']); ?></span>
+                                    </div>
+                                    <h3 class="projectCardTitle ubuntu-bold"><?= escape_html($project['title']); ?></h3>
+                                    <p class="projectCardDescription ubuntu-medium"><?= escape_html($project['summary']); ?></p>
+                                    <ul class="projectTechList ubuntu-medium">
+                                        <?php foreach ($project['technologies'] as $technology): ?>
+                                            <li><?= escape_html($technology); ?></li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                    <div class="projectCardActions">
+                                        <?php foreach ($project['actions'] as $action): ?>
+                                            <?php if (($action['kind'] ?? '') === 'modal'): ?>
+                                                <button class="btnStyle ubuntu-bold projectActionButton" type="button"
+                                                    data-project-modal-open="<?= escape_html($project['slug']); ?>"><?= escape_html($action['label']); ?></button>
+                                            <?php else: ?>
+                                                <a class="btnStyle ubuntu-bold projectActionButton"
+                                                    href="<?= escape_html($action['url'] ?? '#'); ?>"
+                                                    <?php if (!empty($action['target'])): ?>target="<?= escape_html($action['target']); ?>" rel="noopener noreferrer"<?php endif; ?>><?= escape_html($action['label']); ?></a>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </section>
-
         </article>
+        <div class="projectModals" aria-live="polite">
+            <?php foreach ($projects as $project): ?>
+                <div class="projectModal" id="modal-<?= escape_html($project['slug']); ?>" hidden>
+                    <div class="projectModalBackdrop" data-project-modal-close></div>
+                    <article class="projectModalDialog card-style" role="dialog" aria-modal="true"
+                        aria-labelledby="project-modal-title-<?= escape_html($project['slug']); ?>">
+                        <button class="projectModalClose btnStyle ubuntu-bold" type="button" data-project-modal-close>Bezárás</button>
+                        <div class="projectModalHero">
+                            <img class="projectModalImage" src="<?= escape_html($project['cover_image']); ?>"
+                                alt="<?= escape_html($project['cover_alt']); ?>">
+                            <div class="projectModalIntro">
+                                <span class="projectTypeTag ubuntu-medium"><?= escape_html($projectTypeLabels[$project['type']] ?? $project['type']); ?></span>
+                                <h3 class="ubuntu-bold" id="project-modal-title-<?= escape_html($project['slug']); ?>"><?= escape_html($project['title']); ?></h3>
+                                <p class="projectModalLead ubuntu-medium"><?= escape_html($project['popup']['intro']); ?></p>
+                                <div class="projectModalActions">
+                                    <?php foreach ($project['actions'] as $action): ?>
+                                        <?php if (($action['kind'] ?? '') !== 'modal'): ?>
+                                            <a class="btnStyle ubuntu-bold projectActionButton"
+                                                href="<?= escape_html($action['url'] ?? '#'); ?>"
+                                                <?php if (!empty($action['target'])): ?>target="<?= escape_html($action['target']); ?>" rel="noopener noreferrer"<?php endif; ?>><?= escape_html($action['label']); ?></a>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="projectModalBlocks">
+                            <section class="projectBlock projectBodyBlock">
+                                <h4 class="ubuntu-bold">Projekt áttekintés</h4>
+                                <p class="projectBodyText ubuntu-medium"><?= escape_html($project['popup']['body']['text']); ?></p>
+                                <?php if (!empty($project['popup']['body']['images'])): ?>
+                                    <div class="projectGallery">
+                                        <?php foreach ($project['popup']['body']['images'] as $image): ?>
+                                            <img src="<?= escape_html($image['src']); ?>" alt="<?= escape_html($image['alt']); ?>">
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </section>
+
+                            <section class="projectBlock projectKeyPointsBlock">
+                                <h4 class="ubuntu-bold">Főbb elemek</h4>
+                                <ul class="projectBlockList ubuntu-medium">
+                                    <?php foreach ($project['popup']['key_points'] as $item): ?>
+                                        <li><?= escape_html($item); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </section>
+                        </div>
+                    </article>
+                </div>
+            <?php endforeach; ?>
+        </div>
 
         <!-- Kapcsolat -->
         <article id="contact">
